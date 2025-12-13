@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:w2_23/perimeter_page.dart';
 import 'rectangle_page.dart'; //เรียกให้รู้จักหน้าสอง
+
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MyHomePage(),
         '/rectangle_page': (context) => RectanglePage()//ไปหน้าสอง
+        '/perimeter_page' : (context) => PerimeterPage()
       },
     );
   }
@@ -38,7 +41,13 @@ class MyHomePage extends StatelessWidget {
           child: Text("คำนวณพื้นที่สี่เหลี่ยม"),
           style: TextButton.styleFrom(backgroundColor: Colors.red, // เปลี่ยนสีปุ่ม
           foregroundColor: Colors.white), //สีตัวหนังสือในปุ่ม
+          child: TextButton( //ปุ่มกด
+            onPressed: () => Navigator.pushNamed(context, '/rectangle_page'),//นำทางไปหน้าสอง
+            child: Text("คำนวณพื้นที่สี่เหลี่ยม"),
+            style: TextButton.styleFrom(backgroundColor: Colors.red, // เปลี่ยนสีปุ่ม
+                foregroundColor: Colors.white), //สีตัวหนังสือในปุ่ม
         ),
+
       ), // ปุ่มตรงกลางจอ
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:w2_23/perimeter_page.dart';
+import 'package:w2_23/khanompiakpoon_page.dart';
 import 'package:w2_23/rectangle_page.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MyHomePage(),
         '/rectangle_page': (context) => const RectanglePage(),
-        '/perimeter_page': (context) => const PerimeterPage(),
+        '/khanompiakpoon_page': (context) => const KhanomPiakPoonPage(),
       },
     );
   }
@@ -96,10 +96,10 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(height: 20),
               _buildMenuButton(
                 context,
-                title: "คำนวณเส้นรอบรูป",
+                title: "คำนวณเส้นรอบรูปขนมเปียกปูน",
                 icon: Icons.linear_scale_rounded,
                 color: Colors.blueAccent,
-                route: '/perimeter_page',
+                route: '/khanompiakpoon_page',
               ),
             ],
           ),

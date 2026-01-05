@@ -8,23 +8,26 @@ class PerimeterPage extends StatefulWidget {
 }
 
 class _PerimeterPageState extends State<PerimeterPage> {
-  int _side = 0;        // ความยาวด้าน
-  int _perimeter = 0;  // เส้นรอบรูป
+  int _width = 0;
+  int _length = 0;
+  int _perimeter = 0; // เส้นรอบรูป
 
-  final TextEditingController _sideCtrl = TextEditingController();
+  final TextEditingController _widthCtrl = TextEditingController();
+  final TextEditingController _lengthCtrl = TextEditingController();
 
   final InputDecoration _textFieldStyle = InputDecoration(
     filled: true,
     fillColor: Colors.blue[100],
-    border: const OutlineInputBorder(),
+    border: OutlineInputBorder(),
   );
 
-  // ฟังก์ชันคำนวณเส้นรอบรูปขนมเปียกปูน
+  // ฟังก์ชันคำนวณเส้นรอบรูป
   void _calPerimeter() {
-    _side = int.tryParse(_sideCtrl.text) ?? 0;
+    _width = int.tryParse(_widthCtrl.text) ?? 0;
+    _length = int.tryParse(_lengthCtrl.text) ?? 0;
 
     setState(() {
-      _perimeter = 4 * _side;
+      _perimeter = 2 * (_width + _length);
     });
   }
 
@@ -32,32 +35,41 @@ class _PerimeterPageState extends State<PerimeterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("คำนวณเส้นรอบรูปขนมเปียกปูน"),
+        title: Text("คำนวณเส้นรอบรูปสี่เหลี่ยม"),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Text(
-              "ความยาวด้าน = $_side เมตร\nเส้นรอบรูป = $_perimeter เมตร",
-              style: const TextStyle(fontSize: 22),
+              "กว้าง $_width เมตร ยาว $_length เมตร\nเส้นรอบรูป = $_perimeter เมตร",
+              style: TextStyle(fontSize: 22),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             TextField(
-              controller: _sideCtrl,
+              controller: _widthCtrl,
               keyboardType: TextInputType.number,
               decoration: _textFieldStyle.copyWith(
-                label: const Text("ความยาวด้าน"),
-                hint: const Text("กรอกความยาวด้าน"),
+                label: Text("ความกว้าง"),
+                hint: Text("กรอกความกว้าง"),
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 20),
+            TextField(
+              controller: _lengthCtrl,
+              keyboardType: TextInputType.number,
+              decoration: _textFieldStyle.copyWith(
+                label: Text("ความยาว"),
+                hint: Text("กรอกความยาว"),
+              ),
+            ),
+            SizedBox(height: 30),
             ElevatedButton(
               onPressed: _calPerimeter,
-              child: const Text("คำนวณ"),
+              child: Text("คำนวณ"),
             ),
           ],
         ),

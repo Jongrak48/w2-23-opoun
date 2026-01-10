@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 // นำเข้าแพ็กเกจ material ของ Flutter
+// ใช้สำหรับ Widget พื้นฐาน เช่น Scaffold, AppBar, TextField, Button ฯลฯ
 
+// ==============================
 // หน้าแอปคำนวณเส้นรอบรูปขนมเปียกปูน
+// ==============================
 class KhanomPiakPoonPage extends StatefulWidget {
   const KhanomPiakPoonPage({super.key});
 
   @override
   State<KhanomPiakPoonPage> createState() => _KhanomPiakPoonPageState();
+// createState()
+// ใช้สร้าง State ของหน้า KhanomPiakPoonPage
+// เพื่อเก็บข้อมูลที่เปลี่ยนแปลงได้ เช่น ตัวเลขที่ผู้ใช้กรอก
 }
 
+// ==============================
+// คลาส State สำหรับจัดการข้อมูลและหน้าจอ
+// ==============================
 class _KhanomPiakPoonPageState extends State<KhanomPiakPoonPage> {
 
-  int _diagonal = 0;    // ค่าเส้นทแยง
-  int _perimeter = 0;  // ค่าเส้นรอบรูป
+  int _diagonal = 0;    // ตัวแปรเก็บค่าเส้นทแยงที่ผู้ใช้กรอก
+  int _perimeter = 0;  // ตัวแปรเก็บค่าเส้นรอบรูปที่คำนวณได้
 
+  // Controller สำหรับควบคุมและดึงค่าจาก TextField
   final TextEditingController _diagonalCtrl = TextEditingController();
 
+  // รูปแบบตกแต่ง TextField
   final InputDecoration _textFieldStyle = InputDecoration(
     filled: true,
     fillColor: Colors.white,
@@ -24,22 +35,32 @@ class _KhanomPiakPoonPageState extends State<KhanomPiakPoonPage> {
     ),
   );
 
+  // ==============================
   // ฟังก์ชันคำนวณเส้นรอบรูป
+  // ==============================
   void _calPerimeter() {
+    // แปลงค่าที่ผู้ใช้กรอกจาก TextField เป็น int
+    // ถ้าแปลงไม่ได้ให้เป็น 0
     _diagonal = int.tryParse(_diagonalCtrl.text) ?? 0;
 
+    // setState ใช้บอก Flutter ว่ามีข้อมูลเปลี่ยน
+    // เพื่อให้หน้าจอวาดใหม่
     setState(() {
-      // สูตร: เส้นรอบรูปขนมเปียกปูน = 4 × เส้นทแยง
+      // สูตรคำนวณเส้นรอบรูปขนมเปียกปูน
+      // เส้นรอบรูป = 4 × เส้นทแยง
       _perimeter = 4 * _diagonal;
     });
   }
 
+  // ==============================
+  // ฟังก์ชัน build ใช้สร้าง UI ของหน้า
+  // ==============================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // โครงสร้างหลักของหน้า
       appBar: AppBar(
-        title: Text("เส้นรอบรูปขนมเปียกปูน"), // ✅ เปลี่ยนชื่อหน้า
-        centerTitle: true,
+        title: Text("เส้นรอบรูปขนมเปียกปูน"),
       ),
 
       body: Padding(
@@ -55,6 +76,7 @@ class _KhanomPiakPoonPageState extends State<KhanomPiakPoonPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
 
+                // ไอคอนตกแต่ง
                 Icon(
                   Icons.bakery_dining,
                   size: 60,
@@ -63,6 +85,7 @@ class _KhanomPiakPoonPageState extends State<KhanomPiakPoonPage> {
 
                 SizedBox(height: 20),
 
+                // แสดงค่าเส้นทแยงที่ผู้ใช้กรอก
                 Text(
                   "เส้นทแยง = $_diagonal หน่วย",
                   style: TextStyle(fontSize: 18),
@@ -70,6 +93,7 @@ class _KhanomPiakPoonPageState extends State<KhanomPiakPoonPage> {
 
                 SizedBox(height: 10),
 
+                // แสดงผลลัพธ์เส้นรอบรูป
                 Text(
                   "เส้นรอบรูป = $_perimeter หน่วย",
                   style: TextStyle(
@@ -80,6 +104,7 @@ class _KhanomPiakPoonPageState extends State<KhanomPiakPoonPage> {
 
                 SizedBox(height: 30),
 
+                // ช่องกรอกค่าเส้นทแยง
                 TextField(
                   controller: _diagonalCtrl,
                   keyboardType: TextInputType.number,
@@ -91,11 +116,13 @@ class _KhanomPiakPoonPageState extends State<KhanomPiakPoonPage> {
 
                 SizedBox(height: 30),
 
+                // ปุ่มกดคำนวณ
                 SizedBox(
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton.icon(
                     onPressed: _calPerimeter,
+                    // เมื่อกดปุ่ม จะเรียกฟังก์ชัน _calPerimeter()
                     icon: Icon(Icons.calculate),
                     label: Text("คำนวณ"),
                   ),
